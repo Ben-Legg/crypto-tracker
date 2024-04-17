@@ -6,7 +6,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Crypto Tracker App</h1>
+
+        <div class="search-container">
+            <h2>Search for a Cryptocurrency to Track</h2>
+
+            <form action="/path">
+                <div class="">
+                    <label for="coin">Coin Sybmbol:</label>
+                    <input id="coin" name="coin" type="text" placeholder="BTC">
+                </div>
+
+                <div>
+                    <label for="currency">Track in:</label>
+                    <select id="currency" name="currency" >
+                        <option value="usd">USD</option>
+                        <option value="gbp">GBP</option>
+                        <option value="eur">EUR</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
