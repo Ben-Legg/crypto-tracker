@@ -1,6 +1,14 @@
 const apiKey = "CG-EBE4jd5B73HeK6RLAiNR1pYN";
 
-function buildTile(coin){ // Function to create a tile using object data
+function convertTime(timestamp) { // Converts ISO 8601 format date to readable format
+    const padWithZero = number => number.toString().padStart(2, '0');
+
+    const date = new Date(timestamp);
+    const formattedDate = `${padWithZero(date.getDate())}-${padWithZero(date.getMonth() + 1)}-${date.getFullYear()} ${padWithZero(date.getHours())}:${padWithZero(date.getMinutes())}`;
+    return formattedDate;
+}
+
+function buildTile(coin, currency){ // Function to create a tile using object data
     const list = document.querySelector(".tracked-coins");
 
     const tile = document.createElement("div"); // Create tile for coin
@@ -18,11 +26,14 @@ function buildTile(coin){ // Function to create a tile using object data
     const nameContainer = document.createElement("div"); // Create name elements and container
     nameContainer.classList.add("name-container");
     const symbol = document.createElement("h3");
-    symbol.textContent = coin.symbol;
+    symbol.textContent = `${coin.symbol.toUpperCase()}/${currency}`;
     nameContainer.appendChild(symbol);
     const name = document.createElement("p");
     name.textContent = coin.id;
     nameContainer.appendChild(name);
+    const lastUpdatedDate = document.createElement("p");
+    lastUpdatedDate.textContent = convertTime(`${coin["last-updated"]}`);
+    nameContainer.appendChild(lastUpdatedDate);
     tile.appendChild(nameContainer); // Append to tile
 
     const priceContainer = document.createElement("div"); // Create Price element and container
@@ -31,17 +42,14 @@ function buildTile(coin){ // Function to create a tile using object data
     price.textContent = coin.price;
     priceContainer.appendChild(price);
 
-    const priceChangeContainer = document.createElement("div"); // Create Price change elements and container
-    priceChangeContainer.classList.add("price-change-container");
     const priceChange = document.createElement("p");
     priceChange.classList.add("price-change");
-    priceChange.textContent = `${coin['price-change']}`;
-    priceChangeContainer.appendChild(priceChange);
+    priceChange.textContent = `${coin['price-change'].toFixed(2)}`;
+    priceContainer.appendChild(priceChange);
     const priceChangePercentage = document.createElement("p");
     priceChangePercentage.classList.add("price-change-percentage");
-    priceChangePercentage.textContent = `${coin['price-change-percentage']}%`;
-    priceChangeContainer.appendChild(priceChangePercentage);
-    priceContainer.appendChild(priceChangeContainer);
+    priceChangePercentage.textContent = `${coin['price-change-percentage'].toFixed(2)}%`;
+    priceContainer.appendChild(priceChangePercentage);
     tile.appendChild(priceContainer); // Append to tile
 
     list.appendChild(tile);
@@ -60,7 +68,6 @@ function buildTile(coin){ // Function to create a tile using object data
 //       }
 // }
 
-
 async function requestCoinInfo (id, currency)  {
     try {
         const res = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${id}`, {
@@ -75,9 +82,10 @@ async function requestCoinInfo (id, currency)  {
                     "price": coin.current_price,
                     "price-change": coin.price_change_24h,
                     "price-change-percentage": coin.price_change_percentage_24h,
-                    "image": coin.image
+                    "image": coin.image,
+                    "last-updated": coin.last_updated
                 };
-                buildTile(coinObject);
+                buildTile(coinObject, currency);
             }
         } else {
             alert(`No data for ${id} in ${currency} on CoinGecko`)
@@ -86,3 +94,16 @@ async function requestCoinInfo (id, currency)  {
         console.log("ERROR", e);
     }
 };
+
+const searchForm = document.querySelector("#searchForm");
+searchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const coinInput = searchForm.elements.coin;
+    const coinSearch = coinInput.value.toLowerCase();
+
+    const currencyInput = searchForm.elements.currency;
+    const currencySearch = currencyInput.value.toUpperCase();
+    
+    requestCoinInfo(coinSearch, currencySearch);
+    coinInput.value = "";
+});
