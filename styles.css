@@ -1,0 +1,125 @@
+:root {
+    --text-colour: #CFCFCF;
+    --input-colour: hsla(252, 0%, 0%, 0.3);
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    margin: 0;
+    color: var(--text-colour);
+    background: linear-gradient(35deg, rgba(90,96,140,1) 0%, rgba(43,48,84,1) 100%);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 1.9em;
+    white-space: nowrap;
+    font-weight: bolder;
+}
+
+.search-container {
+    padding: 20px 10px;
+    border-radius: 3px;
+    background: linear-gradient(0deg, rgba(127,134,182,1) 0%, rgba(76,84,136,1) 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-container h2{
+    text-align: center;
+    font-size: 1.2em;
+    padding: 20px;
+    border-block: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#searchForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+#searchForm input,label {
+    margin-block: 2px;
+    letter-spacing: 2px;
+}
+
+input {
+    width: 150px;
+    text-align: center;
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder{
+    color: var(--input-colour);
+}
+
+button {
+    width: 150px;
+    margin-top: 20px;
+    padding: 15px 5px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--text-colour);
+}
+
+.tracked-coins{
+    width: 100%;
+    padding-top: 20px;
+}
+
+.tile {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    margin-block: 10px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    background: linear-gradient(0deg, rgba(127,134,182,1) 0%, rgba(112,120,176,1) 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img-container {
+    grid-column: 1 / 2;
+    width: 50px;
+    height: 50px;
+}
+
+.coin-logo {
+    height: 100%;
+    width: auto;
+}
+
+.name-container {
+    grid-column: 2 / 5;
+    justify-self: center;
+}
+
+.name-container p {
+    margin: 3px;
+    text-transform: capitalize;
+}
+
+.price-container {
+    grid-column: 5 / 7;
+    justify-self: end;
+}
+
+.price-container p {
+    margin: 3px;
+}

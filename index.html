@@ -3,29 +3,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Tracker</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Crypto Tracker App</h1>
-
+        
         <div class="search-container">
-            <h2>Search for a Cryptocurrency to Track</h2>
+            <h1>CRYPTO TRACKER</h1>
+            <h2>Search Below to Find a Cryptocurrency to Track...</h2>
 
-            <form action="/path">
-                <div class="">
-                    <label for="coin">Coin Sybmbol:</label>
-                    <input id="coin" name="coin" type="text" placeholder="BTC">
-                </div>
-
-                <div>
-                    <label for="currency">Track in:</label>
-                    <select id="currency" name="currency" >
-                        <option value="usd">USD</option>
-                        <option value="gbp">GBP</option>
-                        <option value="eur">EUR</option>
-                    </select>
-                </div>
+            <form id="searchForm" action="/">
+                <label for="coin">COIN:</label>
+                <input id="coin" name="coin" type="text" placeholder="Bitcoin">
+                <label for="currency">CURRENCY:</label>
+                <input id="currency" name="currency" type="text" placeholder="USD">
+                <button>SEARCH</button>
             </form>
         </div>
         <div class="tracked-coins">
