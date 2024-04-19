@@ -106,4 +106,5 @@ searchForm.addEventListener('submit', function (e) {
     
     requestCoinInfo(coinSearch, currencySearch);
     coinInput.value = "";
+    currencyInput.value = "";
 });
