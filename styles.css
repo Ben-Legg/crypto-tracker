@@ -1,22 +1,31 @@
 :root {
-    --text-colour: #F2F2F2;
-    --input-colour: hsla(252, 0%, 0%, 0.3);
-    --form-fields: rgba(255, 255, 255, 0.7);
+    --background-colour: #f2f2f2;
+    --text-colour: #030303;
+    --input-colour: rgba(0, 0, 0, 0.3);
+    --form-fields: #E6E6E6;
+    --borders: rgba(0, 0, 0, 0.1);
 }
 
 body {
     font-family: "Nunito", sans-serif;
+    font-size: 15px;
     margin: 0;
     color: var(--text-colour);
-    background: linear-gradient(35deg, rgba(90,96,140,1) 0%, rgba(43,48,84,1) 100%);
+    background-color: var(--background-colour);
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
 }
 
 
 .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: 20px 10px;
     border-radius: 3px;
@@ -32,26 +41,26 @@ h1 {
 .search-container h2{
     font-size: 1.2em;
     padding: 20px;
-    border-block: 1px solid rgba(255, 255, 255, 0.2);
+    border-block: 1px solid var(--borders);
 }
 
 #searchForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
+    width: 200px;
 }
 
 #searchForm input,label {
-    margin-block: 2px;
     letter-spacing: 2px;
 }
 
 input {
-    width: 150px;
+    width: 100%;
+    margin-bottom: 6px;
+    padding-block: 5px;
     text-align: center;
-    padding: 5px;
-    border: none;
+    border: 1px solid var(--borders);
     border-radius: 2px;
     background-color: var(--form-fields);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -62,13 +71,13 @@ input::placeholder{
 }
 
 button {
-    width: 150px;
-    margin-top: 20px;
-    padding: 15px 5px;
+    width: 100%;
+    margin-top: 15px;
+    padding-block: 15px;
     font-family: "Nunito", sans-serif;
     font-weight: 700;
     letter-spacing: 2px;
-    border: none;
+    border: 1px solid var(--borders);
     border-radius: 2px;
     background-color: var(--form-fields);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -86,6 +95,7 @@ button:disabled {
     place-items: center;
     width: 100%;
     height: 50px;
+    margin-top: 15px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 3px;
     background-color: #DC4C64;
@@ -106,10 +116,9 @@ button:disabled {
     align-items: center;
     margin-block: 10px;
     padding: 10px 10px;
+    border-block: 1px solid var(--borders);
     border-radius: 3px;
     font-size: 0.7em;
-    background: linear-gradient(0deg, rgba(127,134,182,1) 0%, rgba(112,120,176,1) 100%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .img-container {
@@ -148,4 +157,19 @@ button:disabled {
 
 .neg-price-change {
     color: red;
+}
+
+@media only screen and (min-width: 600px) {
+
+    body {
+        font-size: 20px;
+    }
+
+    .tracked-coins{
+        width: 600px;
+    }
+
+    .warning-container {
+        height: 70px;
+    }
 }
