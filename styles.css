@@ -1,6 +1,7 @@
 :root {
-    --text-colour: #CFCFCF;
+    --text-colour: #F2F2F2;
     --input-colour: hsla(252, 0%, 0%, 0.3);
+    --form-fields: rgba(255, 255, 255, 0.7);
 }
 
 body {
@@ -19,12 +20,11 @@ body {
     text-align: center;
     padding: 20px 10px;
     border-radius: 3px;
-    background: linear-gradient(0deg, rgba(127,134,182,1) 0%, rgba(76,84,136,1) 100%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 1.6em;
+    letter-spacing: 2px;
     white-space: nowrap;
     font-weight: bolder;
 }
@@ -32,7 +32,7 @@ h1 {
 .search-container h2{
     font-size: 1.2em;
     padding: 20px;
-    border-block: 1px solid rgba(0, 0, 0, 0.2);
+    border-block: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #searchForm {
@@ -53,7 +53,7 @@ input {
     padding: 5px;
     border: none;
     border-radius: 2px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--form-fields);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -70,7 +70,7 @@ button {
     letter-spacing: 2px;
     border: none;
     border-radius: 2px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--form-fields);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: var(--text-colour);
 }
