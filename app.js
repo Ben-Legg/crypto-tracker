@@ -130,7 +130,6 @@ async function requestCoinInfo (coinSeach, currency)  {
                 }
             });
     
-            console.log(res);
             if (!(res.data.length === 0)) {
                 for (const coin of res.data) {
                     const coinObject = {
@@ -146,9 +145,10 @@ async function requestCoinInfo (coinSeach, currency)  {
                     buildTile(coinObject, currency);
                 }
             } else {
-                searchWarning(`No data for ${coinSeach.toUpperCase()}/${currency.toUpperCase()}`);
+                searchWarning(`No data for ${coinSeach.toUpperCase()}/${currency.toUpperCase()} !`);
             }
         } catch (e) {
+            searchWarning(`No data for ${currency.toUpperCase()} markets !`);
             console.log("ERROR", e);
         }
     }
