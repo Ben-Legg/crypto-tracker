@@ -11,27 +11,25 @@ body {
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 20px;
 }
 
-h1 {
-    font-size: 1.9em;
-    white-space: nowrap;
-    font-weight: bolder;
-}
 
 .search-container {
+    text-align: center;
     padding: 20px 10px;
     border-radius: 3px;
     background: linear-gradient(0deg, rgba(127,134,182,1) 0%, rgba(76,84,136,1) 100%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+    font-size: 1.8em;
+    white-space: nowrap;
+    font-weight: bolder;
+}
+
 .search-container h2{
-    text-align: center;
     font-size: 1.2em;
     padding: 20px;
     border-block: 1px solid rgba(0, 0, 0, 0.2);
@@ -122,4 +120,12 @@ button {
 
 .price-container p {
     margin: 3px;
+}
+
+.pos-price-change {
+    color: green;
+}
+
+.neg-price-change {
+    color: red;
 }

@@ -8,6 +8,44 @@ function convertTime(timestamp) { // Converts ISO 8601 format date to readable f
     return formattedDate;
 }
 
+function dynamicRound(price) {
+    if (price < 0.01) {
+        return price.toFixed(8); // Round to 8 decimal places for very low prices
+    } else if (price < 1) {
+        return price.toFixed(6); // Round to 6 decimal places for low prices
+    } else if (price < 100) {
+        return price.toFixed(4); // Round to 4 decimal places for mid-range prices
+    } else {
+        return price.toFixed(2); // Round to 2 decimal places for higher prices
+    }
+}
+
+function addPriceChangeClass(element) {
+    const value = parseFloat(element.textContent);
+    if (value > 0) {
+        element.classList.add("pos-price-change");
+        element.classList.remove("neg-price-change");
+    } else if (value < 0) {
+        element.classList.add("neg-price-change");
+        element.classList.remove("pos-price-change");
+    } else {
+        element.classList.remove("pos-price-change");
+        element.classList.remove("neg-price-change");
+    }
+}
+
+function colourPriceChanges() {
+    const priceChanges = document.querySelectorAll(".price-change");
+    for (const priceChange of priceChanges) {
+        addPriceChangeClass(priceChange);
+    }
+
+    const priceChangePercentages = document.querySelectorAll(".price-change-percentage");
+    for (const priceChangePercentage of priceChangePercentages) {
+        addPriceChangeClass(priceChangePercentage);
+    }
+}
+
 function buildTile(coin, currency){ // Function to create a tile using object data
     const trackedCoins = document.querySelector(".tracked-coins");
 
@@ -44,15 +82,18 @@ function buildTile(coin, currency){ // Function to create a tile using object da
 
     const priceChange = document.createElement("p"); // Create price change element
     priceChange.classList.add("price-change");
-    priceChange.textContent = `${coin['price-change'].toFixed(2)}`;
+    priceChange.textContent = `${dynamicRound(coin['price-change'])}`; // Dynamically round the price change based on value
     priceContainer.appendChild(priceChange);
     const priceChangePercentage = document.createElement("p"); // Create percentage price change element
+    priceChangePercentage.classList.add("price-change");
     priceChangePercentage.classList.add("price-change-percentage");
-    priceChangePercentage.textContent = `${coin['price-change-percentage'].toFixed(2)}%`;
+    priceChangePercentage.textContent = `${dynamicRound(coin['price-change-percentage'])}%`; // Dynamically round the percentage price change based on value
     priceContainer.appendChild(priceChangePercentage);
     tile.appendChild(priceContainer); // Append price container to tile
 
     trackedCoins.appendChild(tile); // Append tile to tracked coins
+
+    colourPriceChanges();
 }
 
 async function requestCoinInfo (id, currency)  {
