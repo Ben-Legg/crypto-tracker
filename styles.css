@@ -75,9 +75,29 @@ button {
     color: var(--text-colour);
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.warning-container {
+    opacity: 0;
+    place-items: center;
+    width: 100%;
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    background-color: #DC4C64;
+    transition: opacity 0.5s;
+}
+
+.warning-container.active {
+    opacity: 1;
+}
+
 .tracked-coins{
     width: 100%;
-    padding-top: 20px;
 }
 
 .tile {

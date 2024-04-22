@@ -96,43 +96,88 @@ function buildTile(coin, currency){ // Function to create a tile using object da
     colourPriceChanges();
 }
 
-async function requestCoinInfo (id, currency)  {
-    try {
-        const res = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${id}`, {
-            headers: {'x-cg-demo-api-key': apiKey}
-        });
-        if (!(res.data.length === 0)) {
-            for (const coin of res.data) {
-                const coinObject = {
-                    "id": coin.id,
-                    "symbol": coin.symbol,
-                    "currency": currency,
-                    "price": coin.current_price,
-                    "price-change": coin.price_change_24h,
-                    "price-change-percentage": coin.price_change_percentage_24h,
-                    "image": coin.image,
-                    "last-updated": coin.last_updated
-                };
-                buildTile(coinObject, currency);
+function searchWarning(warningMessage) {
+    const formSubmitBtn = document.querySelector("button");
+    formSubmitBtn.disabled = true;
+
+    const warningContainer = document.querySelector(".warning-container"); // Find warning container
+    const warningElement = document.querySelector(".warning-message"); // Find warning message p element
+    warningElement.textContent = warningMessage;
+    warningContainer.classList.add("active"); // Make container visable
+
+    setTimeout(() => {
+        warningContainer.classList.remove("active"); // Make container invisable after 10s
+        setTimeout(() => {
+            warningElement.textContent = ""; // Remove text content once transition is done
+            formSubmitBtn.disabled = false;
+        }, 500);
+    }, 2000);
+}
+
+async function requestCoinInfo (coinSeach, currency)  {
+    if (coinSeach.length <= 5) {
+        searchWarning("Please enter full coin name !");
+    } else {
+        try {
+    
+            const res = await axios.get(`https://api.coingecko.com/api/v3/coins/markets`, {
+                params: {
+                    ids: coinSeach,
+                    vs_currency: currency
+                },
+                headers: {
+                    'x-cg-demo-api-key': apiKey
+                }
+            });
+    
+            console.log(res);
+            if (!(res.data.length === 0)) {
+                for (const coin of res.data) {
+                    const coinObject = {
+                        "id": coin.coinSeach,
+                        "symbol": coin.symbol,
+                        "currency": currency,
+                        "price": coin.current_price,
+                        "price-change": coin.price_change_24h,
+                        "price-change-percentage": coin.price_change_percentage_24h,
+                        "image": coin.image,
+                        "last-updated": coin.last_updated
+                    };
+                    buildTile(coinObject, currency);
+                }
+            } else {
+                searchWarning(`No data for ${coinSeach.toUpperCase()}/${currency.toUpperCase()}`);
             }
-        } else {
-            alert(`No data for ${id} in ${currency} on CoinGecko`)
+        } catch (e) {
+            console.log("ERROR", e);
         }
-    } catch (e) {
-        console.log("ERROR", e);
     }
 };
+
 
 const searchForm = document.querySelector("#searchForm");
 searchForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const coinInput = searchForm.elements.coin;
-    const coinSearch = coinInput.value.toLowerCase();
+    const coinSeach = coinInput.value.toLowerCase();
 
     const currencyInput = searchForm.elements.currency;
     const currencySearch = currencyInput.value;
     
-    requestCoinInfo(coinSearch, currencySearch);
+    if (coinSeach && currencySearch) {
+        requestCoinInfo(coinSeach, currencySearch);
+    } else {
+        let warningMessage = "";
+        if (!coinSeach && !currencySearch) {
+            warningMessage = "Coin and currency required !";
+        } else if (!coinSeach ) {
+            warningMessage = "Coin required !";
+        } else if (!currencySearch) {
+            warningMessage = "Currency required !";
+        }
+        searchWarning(warningMessage);
+    }
+
     coinInput.value = "";
     currencyInput.value = "";
 });
