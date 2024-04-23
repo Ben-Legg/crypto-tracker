@@ -9,11 +9,11 @@ function convertTime(timestamp) { // Converts ISO 8601 format date to readable f
 }
 
 function dynamicRound(price) {
-    if (price < 0.01) {
+    if (Math.abs(price) < 0.01) {
         return price.toFixed(8); // Round to 8 decimal places for very low prices
-    } else if (price < 1) {
+    } else if (Math.abs(price) < 1) {
         return price.toFixed(6); // Round to 6 decimal places for low prices
-    } else if (price < 100) {
+    } else if (Math.abs(price) < 100) {
         return price.toFixed(4); // Round to 4 decimal places for mid-range prices
     } else {
         return price.toFixed(2); // Round to 2 decimal places for higher prices
