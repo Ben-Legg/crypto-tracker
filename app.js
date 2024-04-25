@@ -34,6 +34,22 @@ function addPriceChangeClass(element) {
     }
 }
 
+function tileHoverEffects(tile) {
+    tile.addEventListener("mouseenter", () => {
+        tile.classList.add("tile-hover");
+        const img = tile.querySelector('.img-container img');
+        img.classList.add('tile-hover-img');
+        setTimeout(() => {
+            img.classList.remove('tile-hover-img');
+        }, 900);
+    });
+    
+    tile.addEventListener('mouseleave', () => {
+        tile.classList.remove("tile-hover");
+    });
+}
+
+
 function colourPriceChanges() {
     const priceChanges = document.querySelectorAll(".price-change");
     for (const priceChange of priceChanges) {
@@ -92,6 +108,8 @@ function buildTile(coin, currency){ // Function to create a tile using object da
     tile.appendChild(priceContainer); // Append price container to tile
 
     trackedCoins.appendChild(tile); // Append tile to tracked coins
+
+    tileHoverEffects(tile);
 
     colourPriceChanges();
 }
