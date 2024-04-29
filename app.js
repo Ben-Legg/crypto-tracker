@@ -66,6 +66,11 @@ function buildTile(coin, currency){ // Function to create a tile using object da
     const tile = document.createElement("div"); // Create coin tile
     tile.classList.add("tile");
 
+    const removeTileButton = document.createElement("div"); // Create tile remove button
+    removeTileButton.classList.add("remove");
+    removeTileButton.addEventListener("click", () => tile.remove()); // Remove the tile when the remove button is clicked
+    tile.appendChild(removeTileButton); // Append tile remove button to tile
+
     const imgContainer = document.createElement("div"); // Create image container
     imgContainer.classList.add("img-container");
     const coinImg = document.createElement("img"); // Create image element

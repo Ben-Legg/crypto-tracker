@@ -112,6 +112,7 @@ button:disabled {
 }
 
 .tile {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
@@ -121,6 +122,27 @@ button:disabled {
     border-radius: 3px;
     font-size: 0.7em;
 }
+
+.remove {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    opacity: 0.2;
+    font-size: 1.7em;
+}
+
+.remove:hover {
+    opacity: 1;
+}
+
+.remove::after {
+    content: "\00d7";
+}
+
 
 .img-container {
     grid-column: 1 / 2;
